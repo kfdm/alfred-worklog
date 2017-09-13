@@ -6,18 +6,21 @@
 	<string>net.kungfudiscomonkey.alfred.worklog</string>
 	<key>connections</key>
 	<dict>
-		<key>56CDA965-A6EE-49C4-94DD-C5EE21037B06</key>
+		<key>133ADCD8-0275-4F54-AA18-849908AAA82D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E923D56F-B9C3-42D4-8A1B-398F824C5B7B</string>
+				<string>6B75F362-E7AE-4788-B8ED-D26C6A9F5994</string>
 				<key>modifiers</key>
-				<integer>524288</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>Yesterday's Worklog</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>56CDA965-A6EE-49C4-94DD-C5EE21037B06</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>CFB5E7FB-AC60-4853-A29B-B7C0BBBD1B49</string>
@@ -28,13 +31,29 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>A7821AAC-402F-4FBC-87D7-FB9B6B5289F2</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>506992CF-E171-4A4A-8790-C5697B829F9D</string>
 				<key>modifiers</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>Open in GitHub</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B2AC2627-8821-44DF-98AE-E68C0E0EA786</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E923D56F-B9C3-42D4-8A1B-398F824C5B7B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -50,6 +69,27 @@
 	<string>Worklog</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>worklog yesterday</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open Yesterday's Notes</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B2AC2627-8821-44DF-98AE-E68C0E0EA786</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -70,29 +110,6 @@
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>E923D56F-B9C3-42D4-8A1B-398F824C5B7B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>worklog.sh</string>
-				<key>type</key>
-				<integer>8</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>CFB5E7FB-AC60-4853-A29B-B7C0BBBD1B49</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -129,6 +146,94 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
+				<string>worklog.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CFB5E7FB-AC60-4853-A29B-B7C0BBBD1B49</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>worklog tomorrow</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open Tomorrow's Notes</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>133ADCD8-0275-4F54-AA18-849908AAA82D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>tomorrow.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6B75F362-E7AE-4788-B8ED-D26C6A9F5994</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>worklog git</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open Repo</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A7821AAC-402F-4FBC-87D7-FB9B6B5289F2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string>git.sh</string>
 				<key>type</key>
 				<integer>8</integer>
@@ -147,22 +252,54 @@ from www.flaticon.com
 is licensed by http://creativecommons.org/licenses/by/3.0/</string>
 	<key>uidata</key>
 	<dict>
+		<key>133ADCD8-0275-4F54-AA18-849908AAA82D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>230</integer>
+			<key>ypos</key>
+			<integer>290</integer>
+		</dict>
 		<key>506992CF-E171-4A4A-8790-C5697B829F9D</key>
 		<dict>
 			<key>xpos</key>
 			<integer>530</integer>
 			<key>ypos</key>
-			<integer>310</integer>
+			<integer>440</integer>
 		</dict>
 		<key>56CDA965-A6EE-49C4-94DD-C5EE21037B06</key>
 		<dict>
 			<key>xpos</key>
-			<integer>340</integer>
+			<integer>230</integer>
 			<key>ypos</key>
-			<integer>180</integer>
+			<integer>170</integer>
+		</dict>
+		<key>6B75F362-E7AE-4788-B8ED-D26C6A9F5994</key>
+		<dict>
+			<key>note</key>
+			<string>Open tomorrow's note</string>
+			<key>xpos</key>
+			<integer>530</integer>
+			<key>ypos</key>
+			<integer>310</integer>
+		</dict>
+		<key>A7821AAC-402F-4FBC-87D7-FB9B6B5289F2</key>
+		<dict>
+			<key>xpos</key>
+			<integer>230</integer>
+			<key>ypos</key>
+			<integer>420</integer>
+		</dict>
+		<key>B2AC2627-8821-44DF-98AE-E68C0E0EA786</key>
+		<dict>
+			<key>xpos</key>
+			<integer>230</integer>
+			<key>ypos</key>
+			<integer>50</integer>
 		</dict>
 		<key>CFB5E7FB-AC60-4853-A29B-B7C0BBBD1B49</key>
 		<dict>
+			<key>note</key>
+			<string>Open Today</string>
 			<key>xpos</key>
 			<integer>530</integer>
 			<key>ypos</key>
@@ -170,6 +307,8 @@ is licensed by http://creativecommons.org/licenses/by/3.0/</string>
 		</dict>
 		<key>E923D56F-B9C3-42D4-8A1B-398F824C5B7B</key>
 		<dict>
+			<key>note</key>
+			<string>Open yesterday's note</string>
 			<key>xpos</key>
 			<integer>530</integer>
 			<key>ypos</key>
