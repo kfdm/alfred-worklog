@@ -10,11 +10,31 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>E923D56F-B9C3-42D4-8A1B-398F824C5B7B</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Yesterday's Worklog</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>CFB5E7FB-AC60-4853-A29B-B7C0BBBD1B49</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>506992CF-E171-4A4A-8790-C5697B829F9D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Open in GitHub</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -30,6 +50,52 @@
 	<string>Worklog</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>yesterday.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E923D56F-B9C3-42D4-8A1B-398F824C5B7B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>worklog.sh</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CFB5E7FB-AC60-4853-A29B-B7C0BBBD1B49</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -63,14 +129,14 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>worklog.sh</string>
+				<string>git.sh</string>
 				<key>type</key>
 				<integer>8</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>CFB5E7FB-AC60-4853-A29B-B7C0BBBD1B49</string>
+			<string>506992CF-E171-4A4A-8790-C5697B829F9D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -79,6 +145,13 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>506992CF-E171-4A4A-8790-C5697B829F9D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>530</integer>
+			<key>ypos</key>
+			<integer>310</integer>
+		</dict>
 		<key>56CDA965-A6EE-49C4-94DD-C5EE21037B06</key>
 		<dict>
 			<key>xpos</key>
@@ -92,6 +165,13 @@
 			<integer>530</integer>
 			<key>ypos</key>
 			<integer>180</integer>
+		</dict>
+		<key>E923D56F-B9C3-42D4-8A1B-398F824C5B7B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>530</integer>
+			<key>ypos</key>
+			<integer>50</integer>
 		</dict>
 	</dict>
 	<key>variables</key>
