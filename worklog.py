@@ -29,14 +29,14 @@ SPECIAL[YESTERDAY.strftime('%Y-%m-%d-%Y%m%d.markdown')] = {
     "icon": {'path': 'yesterday.png'},
 }
 
-FILES = [f for f in os.listdir(WORKLOG_DIR) if f.endswith('markdown')]
+FILES = sorted([f for f in os.listdir(WORKLOG_DIR) if f.endswith('markdown')], reverse=True)
 
 
 for ts, args in SPECIAL.items():
     args['arg'] = ts
     RESPONSE.append(args)
 
-for path in FILES[:10]:
+for path in FILES[:8]:
     if path not in SPECIAL:
         RESPONSE.append({
             'title': os.path.basename(path),
