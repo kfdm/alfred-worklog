@@ -11,9 +11,7 @@ with open('template.markdown') as fp:
 
 if not os.path.exists(TARGET):
     DATE = sys.argv[1].split('-')
-    print(DATE)
     TEMPLATE = TEMPLATE.replace('<date>', '{}-{}-{}'.format(*DATE))
-    print(TEMPLATE)
     with open(TARGET, 'w+') as fp:
         fp.write(TEMPLATE)
 
