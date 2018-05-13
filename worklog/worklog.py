@@ -31,16 +31,17 @@ SPECIAL[YESTERDAY.strftime('%Y-%m-%d-%Y%m%d.markdown')] = {
 FILES = [f for f in os.listdir(WORKLOG_DIR) if f.endswith('markdown')]
 
 
-for ts, args in SPECIAL.items():
-    args['arg'] = ts
-    RESPONSE.append(args)
+def main():
+    for ts, args in SPECIAL.items():
+        args['arg'] = ts
+        RESPONSE.append(args)
 
-for path in sorted(FILES, reverse=True)[:8]:
-    if path not in SPECIAL:
-        RESPONSE.append({
-            'title': os.path.basename(path),
-            'arg': path,
-            'icon': {'path': 'review.png'},
-        })
+    for path in sorted(FILES, reverse=True)[:8]:
+        if path not in SPECIAL:
+            RESPONSE.append({
+                'title': os.path.basename(path),
+                'arg': path,
+                'icon': {'path': 'review.png'},
+            })
 
-print(json.dumps({'items': RESPONSE}))
+    print(json.dumps({'items': RESPONSE}))
