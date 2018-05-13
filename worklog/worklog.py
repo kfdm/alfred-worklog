@@ -1,9 +1,7 @@
-#!/usr/bin/env python
-import os
-import json
-import datetime
 import collections
-
+import datetime
+import json
+import os
 
 RESPONSE = []
 WORKLOG_DIR = os.path.join(os.path.expanduser('~'), 'Documents', 'worklog')

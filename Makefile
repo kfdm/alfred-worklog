@@ -1,20 +1,24 @@
 ALFRED_TARGET="${HOME}/Library/Application Support/Alfred 3/Alfred.alfredpreferences/workflows/alfred-worklog"
 ALFRED_SRC="$(shell pwd)/alfred-workflow"
+BITBAR_PLUGINS=$(shell defaults read com.matryer.BitBar pluginsDirectory)
+VIRTUAL_ENV:="$(shell pwd)/.venv"
 
-install: install-alfred
+refresh: .venv
+	@echo Installing scripts
+	@.venv/bin/pip install -e .
 
+install: install-alfred install-bitbar
 
 .venv:
+	@echo Building virtual envw
 	python3 -m venv .venv
-	.venv/bin/pip install -e .
 
+install-alfred: refresh
+	/bin/cp "${VIRTUAL_ENV}/bin/worklog.alfred" alfred-workflow/worklog.alfred
+	/bin/cp "${VIRTUAL_ENV}/bin/open.alfred" alfred-workflow/open.alfred
+	@echo Linking Alfred
+	@/bin/ln -his ${ALFRED_SRC} ${ALFRED_TARGET}
 
-install-alfred:
-	@echo Installing scripts
-	.venv/bin/pip install --upgrade --no-deps --install-option="--install-scripts=${ALFRED_SRC}" .['alfred']
-	#@echo Linking Alfred
-	#/bin/ln -s ${ALFRED_SRC} ${ALFRED_TARGET}
-
-clean:
-	/bin/rm alfred-workflow/open.py
-	/bin/rm alfred-workflow/worklog.py
+install-bitbar: refresh
+	@echo Linking Bitbar
+	/bin/ln -is "${VIRTUAL_ENV}/bin/worklog.bitbar" "${BITBAR_PLUGINS}/worklog.5m.py"

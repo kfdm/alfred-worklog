@@ -8,13 +8,9 @@ setup(
     packages=['worklog'],
     entry_points={
         'console_scripts': [
-            'worklog.5m.py = worklog:main[bitbar]',
-            'open.alfred = worklog.open:main[alfred]',
-            'worklog.alfred = worklog.worklog:main[alfred]',
+            'worklog.bitbar = worklog.bitbar:main',
+            'open.alfred = worklog.open:main',
+            'worklog.alfred = worklog.worklog:main',
         ]
-    },
-    extras_require={
-        'alfred': [],
-        'bitbar': [],
     },
 )
