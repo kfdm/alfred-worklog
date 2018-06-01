@@ -6,6 +6,7 @@ setup(
     author='Paul Traylor',
     url='http://github.com/kfdm/bitbar-worklog/',
     packages=['worklog'],
+    install_requires=['python-frontmatter'],
     entry_points={
         'console_scripts': [
             'worklog.bitbar = worklog.bitbar:main',

@@ -5,6 +5,8 @@ import logging
 import os
 import sys
 
+import frontmatter
+
 WORKLOG_GLOB = os.path.expanduser('~/Documents/worklog/*.markdown')
 
 if 'BitBar' not in os.environ:
@@ -20,20 +22,9 @@ class Worklog(object):
 
     def __enter__(self):
         with open(self.path, encoding='utf8') as fp:
-            in_frontmatter = False
-            in_section = None
-            for line in fp.readlines():
+            post = frontmatter.load(fp)
+            for line in post.content.split('\n'):
                 line = line.strip()
-                if not line:
-                    continue
-                if line == '---' and in_frontmatter:
-                    in_frontmatter = False
-                    continue
-                if line == '---' and not in_frontmatter:
-                    in_frontmatter = True
-                    continue
-                if in_frontmatter:
-                    continue
                 if line.startswith('#'):
                     in_section = line.lstrip('#').lstrip(' ')
                 if line.startswith('*') and in_section:
@@ -63,13 +54,21 @@ def main():
     print('RELOAD | refresh=true')
     print('---')
 
+    later = []
+
     for file in sorted(glob.glob(WORKLOG_GLOB), reverse=True)[:10]:
         with Worklog(file) as wl:
-            print(wl.date.strftime('%A, %B %d'))
+            print(wl.date.strftime('%Y-%m-%d %A'))
             for section, entries in wl:
                 if entries:
-                    print('--', section)
+                    print('-- ', section, '| color=blue')
                     for entry in entries:
-                        print('---- ', entry)
+                        print('-- ', entry)
+                        if section == 'Later':
+                            later.append(wl.date.isoformat() + ' ' + entry)
             print('-----')
             print('-- open | bash="open ' + file + '"')
+
+    print('Later| color=blue')
+    for entry in sorted(later):
+        print('-- ', entry)
