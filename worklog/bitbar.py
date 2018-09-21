@@ -55,6 +55,7 @@ def main():
     print('---')
 
     later = []
+    missed = []
 
     for file in sorted(glob.glob(WORKLOG_GLOB), reverse=True)[:10]:
         with Worklog(file) as wl:
@@ -66,9 +67,16 @@ def main():
                         print('-- ', entry)
                         if section == 'Later':
                             later.append(wl.date.isoformat() + ' ' + entry)
+                        if section == 'Goals' and not entry.endswith('~~'):
+                            missed.append(wl.date.isoformat() + ' ' + entry)
             print('-----')
             print('-- open | bash="open ' + file + '"')
 
-    print('Later| color=blue')
-    for entry in sorted(later):
-        print('-- ', entry)
+    if later:
+        print('Later| color=blue')
+        for entry in sorted(later):
+            print('-- ', entry)
+    if missed:
+        print('Missed| color=red')
+        for entry in sorted(missed):
+            print('-- ', entry)
