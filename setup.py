@@ -2,7 +2,7 @@
 from setuptools import setup
 
 setup(
-    name='BitBar Worklog',
+    name='BitBarWorklog',
     author='Paul Traylor',
     url='http://github.com/kfdm/bitbar-worklog/',
     packages=['worklog'],
