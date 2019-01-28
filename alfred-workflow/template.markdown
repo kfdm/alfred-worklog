@@ -1,12 +1,16 @@
 ---
 layout: post
-title: "Worklog <date>"
+title: Worklog <date>
 ---
-## Goals
-*
 
-## Log
-*
+# Goals
 
-## Later
-*
+- Test
+
+# Log
+
+- Test
+
+# Later
+
+- Test

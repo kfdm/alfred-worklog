@@ -4,10 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-worklog = {path = ".", editable = true}
+worklog = {path = ".",editable = true}
 
 [dev-packages]
 black = "==18.9b0"
+flake8 = "*"
 
 [requires]
 python_version = "3.6"

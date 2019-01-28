@@ -4,6 +4,7 @@ import glob
 import logging
 import os
 import sys
+import re
 
 import frontmatter
 
@@ -14,6 +15,9 @@ if 'BitBar' not in os.environ:
 else:
     sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8')
 
+MATCH_SECTION = re.compile("^[#]+\s(?P<section>.*)$")
+MATCH_TODO = re.compile("^\s*[\*\-]\s+(?P<todo>.*)")
+
 
 class Worklog(object):
     def __init__(self, path):
@@ -21,14 +25,18 @@ class Worklog(object):
         self.sections = collections.defaultdict(list)
 
     def __enter__(self):
-        with open(self.path, encoding='utf8') as fp:
+        with open(self.path, encoding="utf8") as fp:
             post = frontmatter.load(fp)
-            for line in post.content.split('\n'):
+            for line in post.content.split("\n"):
                 line = line.strip()
-                if line.startswith('#'):
-                    in_section = line.lstrip('#').lstrip(' ')
-                if line.startswith('*') and in_section:
-                    entry = line.lstrip('*').lstrip(' ')
+                match = MATCH_SECTION.match(line)
+                if match:
+                    in_section = match.groups()[0]
+                    continue
+
+                match = MATCH_TODO.match(line)
+                if match and in_section:
+                    entry = match.groups()[0].strip()
                     if entry:
                         self.sections[in_section].append(entry)
 
