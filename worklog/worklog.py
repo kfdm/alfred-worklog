@@ -3,8 +3,9 @@ import datetime
 import json
 import os
 
+from worklog import config
+
 RESPONSE = []
-WORKLOG_DIR = os.path.join(os.path.expanduser('~'), 'Documents', 'worklog')
 TODAY = datetime.datetime.today()
 TOMORROW = TODAY + datetime.timedelta(days=1)
 YESTERDAY = TODAY - datetime.timedelta(days=1)
@@ -26,7 +27,7 @@ SPECIAL[YESTERDAY.strftime('%Y-%m-%d-%Y%m%d.markdown')] = {
     'icon': {'path': 'yesterday.png'},
 }
 
-FILES = [f for f in os.listdir(WORKLOG_DIR) if f.endswith('markdown')]
+FILES = [f for f in os.listdir(config.WORKLOG_DIR) if f.endswith('markdown')]
 
 
 def main():
