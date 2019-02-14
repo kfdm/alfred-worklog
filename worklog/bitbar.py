@@ -3,20 +3,65 @@ import datetime
 import glob
 import logging
 import os
-import sys
 import re
+import sys
+from operator import attrgetter
 
 import frontmatter
+from worklog import config
 
-WORKLOG_GLOB = os.path.expanduser('~/Documents/worklog/*.markdown')
-
-if 'BitBar' not in os.environ:
+if "BitBar" not in os.environ:
     logging.basicConfig(level=logging.DEBUG)
 else:
-    sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf8')
+    sys.stdout = open(sys.stdout.fileno(), mode="w", encoding="utf8")
 
-MATCH_SECTION = re.compile("^[#]+\s(?P<section>.*)$")
-MATCH_TODO = re.compile("^\s*[\*\-]\s+(?P<todo>.*)")
+
+class Section:
+    example = "# Section Name"
+    matcher = re.compile("^[#]+\s(?P<section>.*)$")
+
+
+class Todo:
+    @classmethod
+    def match(cls, string):
+        match = cls.matcher.match(string)
+        if match:
+            klass = cls()
+            klass.body = match.groups()[0]
+            return klass
+        return None
+
+
+class TodoPending(Todo):
+    example = " - [ ] Pending TODO"
+    matcher = re.compile("^\s*[\*\-]\s+\[ \]\s+(?P<todo>.*)$")
+
+    def __str__(self):
+        return "[ ] " + self.body
+
+
+class TodoComplete(Todo):
+    example = " - [x] Completed TODD"
+    matcher = re.compile("^\s*[\*\-]\s+\[x\]\s+(?P<todo>.*)$")
+
+    def __str__(self):
+        return "[x] " + self.body
+
+
+class TodoCanceled(Todo):
+    example = " - [-] Canceled TODO"
+    matcher = re.compile("^\s*[\*\-]\s+\[-\]\s+(?P<todo>.*)$")
+
+    def __str__(self):
+        return "[-] " + self.body
+
+
+class TodoRescheduled(Todo):
+    example = " - [>] Rescheduled TODO"
+    matcher = re.compile("^\s*[\*\-]\s+\[>\]\s+(?P<todo>.*)$")
+
+    def __str__(self):
+        return "[>] " + self.body
 
 
 class Worklog(object):
@@ -29,16 +74,20 @@ class Worklog(object):
             post = frontmatter.load(fp)
             for line in post.content.split("\n"):
                 line = line.strip()
-                match = MATCH_SECTION.match(line)
+                match = Section.matcher.match(line)
                 if match:
                     in_section = match.groups()[0]
                     continue
 
-                match = MATCH_TODO.match(line)
-                if match and in_section:
-                    entry = match.groups()[0].strip()
-                    if entry:
-                        self.sections[in_section].append(entry)
+                for parser in [
+                    TodoPending,
+                    TodoComplete,
+                    TodoCanceled,
+                    TodoRescheduled,
+                ]:
+                    match = parser.match(line)
+                    if match and in_section:
+                        self.sections[in_section].append(match)
 
         return self
 
@@ -52,39 +101,36 @@ class Worklog(object):
     @property
     def date(self):
         path = os.path.basename(self.path)
-        year, month, day, _ = path.split('-')
+        year, month, day, _ = path.split("-")
         return datetime.date(int(year), int(month), int(day))
 
 
 def main():
-    print(':pencil:')
-    print('---')
-    print('RELOAD | refresh=true')
-    print('---')
+    print(":pencil:")
+    print("---")
+    print("RELOAD | refresh=true")
+    print("---")
 
-    later = []
-    missed = []
+    todos = collections.defaultdict(list)
 
-    for file in sorted(glob.glob(WORKLOG_GLOB), reverse=True)[:10]:
+    for file in sorted(glob.glob(config.WORKLOG_GLOB), reverse=True)[:10]:
         with Worklog(file) as wl:
-            print(wl.date.strftime('%Y-%m-%d %A'))
+            print(wl.date.strftime("%Y-%m-%d %A"))
             for section, entries in wl:
                 if entries:
-                    print('-- ', section, '| color=blue')
+                    print("-- ", section, "| color=blue")
                     for entry in entries:
-                        print('-- ', entry)
-                        if section == 'Later':
-                            later.append(wl.date.isoformat() + ' ' + entry)
-                        if section == 'Goals' and not entry.endswith('~~'):
-                            missed.append(wl.date.isoformat() + ' ' + entry)
-            print('-----')
+                        print("-- ", entry)
+                        entry.date = wl.date
+                        todos[type(entry)].append(entry)
+            print("-----")
             print('-- open | bash="open ' + file + '"')
 
-    if later:
-        print('Later| color=blue')
-        for entry in sorted(later):
-            print('-- ', entry)
-    if missed:
-        print('Missed| color=red')
-        for entry in sorted(missed):
-            print('-- ', entry)
+    if todos[TodoPending]:
+        print("Later| color=blue")
+        for entry in sorted(todos[TodoRescheduled], key=attrgetter("date")):
+            print("-- {} {}".format(entry.date.isoformat(), entry))
+    if todos[TodoComplete]:
+        print("Done| color=green")
+        for entry in sorted(todos[TodoComplete], key=attrgetter("date")):
+            print("-- {} {}".format(entry.date.isoformat(), entry))
