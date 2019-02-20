@@ -1,18 +1,23 @@
+import argparse
 import os
 import subprocess
-import sys
 
 from worklog import config
 
-TARGET = os.path.join(config.WORKLOG_DIR, sys.argv[1])
+parser = argparse.ArgumentParser()
+parser.add_argument("path")
 
 
 def main():
-    with open("template.markdown") as fp:
-        TEMPLATE = fp.read()
+    args = parser.parse_args()
+
+    TARGET = os.path.join(config.WORKLOG_DIR, args.path)
 
     if not os.path.exists(TARGET):
-        DATE = sys.argv[1].split("-")
+        with open("template.markdown") as fp:
+            TEMPLATE = fp.read()
+
+        DATE = args.path.split("-")
         TEMPLATE = TEMPLATE.replace("<date>", "{}-{}-{}".format(*DATE))
         with open(TARGET, "w+") as fp:
             fp.write(TEMPLATE)

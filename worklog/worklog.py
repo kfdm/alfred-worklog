@@ -13,16 +13,16 @@ YESTERDAY = TODAY - datetime.timedelta(days=1)
 
 SPECIAL = collections.OrderedDict()
 
-SPECIAL[TODAY.strftime('%Y-%m-%d-%Y%m%d.markdown')] = {
+SPECIAL[TODAY.strftime(config.WORKLOG_FMT)] = {
     'title': 'Open Today for Editing',
 }
 
-SPECIAL[TOMORROW.strftime('%Y-%m-%d-%Y%m%d.markdown')] = {
+SPECIAL[TOMORROW.strftime(config.WORKLOG_FMT)] = {
     'title': 'Open Tomorrow for Editing',
     'icon': {'path': 'tomorrow.png'},
 }
 
-SPECIAL[YESTERDAY.strftime('%Y-%m-%d-%Y%m%d.markdown')] = {
+SPECIAL[YESTERDAY.strftime(config.WORKLOG_FMT)] = {
     'title': 'Open Yesterday for Editing',
     'icon': {'path': 'yesterday.png'},
 }
