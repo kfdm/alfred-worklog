@@ -127,7 +127,11 @@ def main():
             print('-- open | bash="open ' + file + '"')
 
     if todos[TodoPending]:
-        print("Later| color=blue")
+        print("Later| color=red")
+        for entry in sorted(todos[TodoPending], key=attrgetter("date")):
+            print("-- {} {}".format(entry.date.isoformat(), entry))
+    if todos[TodoRescheduled]:
+        print("Deferred| color=orange")
         for entry in sorted(todos[TodoRescheduled], key=attrgetter("date")):
             print("-- {} {}".format(entry.date.isoformat(), entry))
     if todos[TodoComplete]:
