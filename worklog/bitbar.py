@@ -101,7 +101,7 @@ class Worklog(object):
     @property
     def date(self):
         path = os.path.basename(self.path)
-        year, month, day, _ = path.split("-")
+        year, month, day = path.split('.')[0].split("-")
         return datetime.date(int(year), int(month), int(day))
 
 
