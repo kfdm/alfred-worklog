@@ -120,8 +120,8 @@ def main():
 
     todos = collections.defaultdict(list)
 
-    for file in sorted(glob.glob(config.WORKLOG_GLOB), reverse=True)[:10]:
-        with Worklog(file) as wl:
+    for fn in sorted(config.WORKLOG_GLOB, reverse=True)[:10]:
+        with Worklog(fn) as wl:
             print(wl.date.strftime("%Y-%m-%d %A"))
             for section, entries in wl:
                 if entries:
@@ -131,7 +131,7 @@ def main():
                         entry.date = wl.date
                         todos[type(entry)].append(entry)
             print("-----")
-            print('-- open | bash="open ' + file + '" && exit')
+            print('-- open | bash="open %s" && exit' % fn)
 
     for klass, heading in sections.items():
         if todos[klass]:

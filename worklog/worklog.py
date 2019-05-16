@@ -1,7 +1,6 @@
 import collections
 import datetime
 import json
-import os
 
 from worklog import config
 
@@ -27,20 +26,16 @@ SPECIAL[YESTERDAY.strftime(config.WORKLOG_FMT)] = {
     'icon': {'path': 'yesterday.png'},
 }
 
-FILES = [f for f in os.listdir(config.WORKLOG_DIR) if f.endswith('markdown')]
-
 
 def main():
     for ts, args in SPECIAL.items():
         args['arg'] = ts
         RESPONSE.append(args)
 
-    for path in sorted(FILES, reverse=True)[:8]:
+    for path in sorted(config.WORKLOG_GLOB, reverse=True)[:8]:
         if path not in SPECIAL:
-            RESPONSE.append({
-                'title': os.path.basename(path),
-                'arg': path,
-                'icon': {'path': 'review.png'},
-            })
+            RESPONSE.append(
+                {"title": path.name, "arg": path.name, "icon": {"path": "review.png"}}
+            )
 
-    print(json.dumps({'items': RESPONSE}))
+    print(json.dumps({"items": RESPONSE}))
