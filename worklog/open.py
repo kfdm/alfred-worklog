@@ -1,11 +1,14 @@
 import argparse
+import datetime
 import subprocess
 
 import frontmatter
 from worklog import config
 
+TODAY = datetime.datetime.today()
+
 parser = argparse.ArgumentParser()
-parser.add_argument("path")
+parser.add_argument("path", nargs="?", default=TODAY.strftime(config.WORKLOG_FMT))
 
 
 def main():
