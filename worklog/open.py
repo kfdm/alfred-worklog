@@ -2,6 +2,7 @@ import argparse
 import os
 import subprocess
 
+import frontmatter
 from worklog import config
 
 parser = argparse.ArgumentParser()
@@ -14,12 +15,17 @@ def main():
     TARGET = os.path.join(config.WORKLOG_DIR, args.path)
 
     if not os.path.exists(TARGET):
+        # Drop extension and use the rest of the file as our date
+        date, ext = args.path.split(".")
+
         with open("template.markdown") as fp:
             TEMPLATE = fp.read()
 
-        DATE = args.path.split("-")
-        TEMPLATE = TEMPLATE.replace("<date>", "{}-{}-{}".format(*DATE))
+        TEMPLATE = TEMPLATE.replace("<date>", date)
+        post = frontmatter.loads(TEMPLATE)
+        post["date"] = date
+
         with open(TARGET, "w+") as fp:
-            fp.write(TEMPLATE)
+            fp.write(frontmatter.dumps(post))
 
     subprocess.call(["/usr/bin/open", TARGET])
