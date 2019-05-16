@@ -18,7 +18,7 @@ else:
 
 class Section:
     example = "# Section Name"
-    matcher = re.compile("^[#]+\s(?P<section>.*)$")
+    matcher = re.compile(r"^[#]+\s(?P<section>.*)$")
 
 
 class Todo:
@@ -34,7 +34,7 @@ class Todo:
 
 class TodoPending(Todo):
     example = " - [ ] Pending TODO"
-    matcher = re.compile("^\s*[\*\-]\s+\[ \]\s+(?P<todo>.*)$")
+    matcher = re.compile(r"^\s*[\*\-]\s+\[ \]\s+(?P<todo>.*)$")
 
     def __str__(self):
         return "[ ] " + self.body
@@ -42,7 +42,7 @@ class TodoPending(Todo):
 
 class TodoComplete(Todo):
     example = " - [x] Completed TODD"
-    matcher = re.compile("^\s*[\*\-]\s+\[x\]\s+(?P<todo>.*)$")
+    matcher = re.compile(r"^\s*[\*\-]\s+\[x\]\s+(?P<todo>.*)$")
 
     def __str__(self):
         return "[x] " + self.body
@@ -50,7 +50,7 @@ class TodoComplete(Todo):
 
 class TodoCanceled(Todo):
     example = " - [-] Canceled TODO"
-    matcher = re.compile("^\s*[\*\-]\s+\[-\]\s+(?P<todo>.*)$")
+    matcher = re.compile(r"^\s*[\*\-]\s+\[-\]\s+(?P<todo>.*)$")
 
     def __str__(self):
         return "[-] " + self.body
@@ -58,7 +58,7 @@ class TodoCanceled(Todo):
 
 class TodoRescheduled(Todo):
     example = " - [>] Rescheduled TODO"
-    matcher = re.compile("^\s*[\*\-]\s+\[>\]\s+(?P<todo>.*)$")
+    matcher = re.compile(r"^\s*[\*\-]\s+\[>\]\s+(?P<todo>.*)$")
 
     def __str__(self):
         return "[>] " + self.body
@@ -101,8 +101,15 @@ class Worklog(object):
     @property
     def date(self):
         path = os.path.basename(self.path)
-        year, month, day = path.split('.')[0].split("-")
+        year, month, day = path.split(".")[0].split("-")
         return datetime.date(int(year), int(month), int(day))
+
+
+sections = {
+    TodoPending: "Later| color=red",
+    TodoRescheduled: "Deferred| color=orange",
+    TodoComplete: "Done| color=green",
+}
 
 
 def main():
@@ -124,17 +131,10 @@ def main():
                         entry.date = wl.date
                         todos[type(entry)].append(entry)
             print("-----")
-            print('-- open | bash="open ' + file + '"')
+            print('-- open | bash="open ' + file + '" && exit')
 
-    if todos[TodoPending]:
-        print("Later| color=red")
-        for entry in sorted(todos[TodoPending], key=attrgetter("date")):
-            print("-- {} {}".format(entry.date.isoformat(), entry))
-    if todos[TodoRescheduled]:
-        print("Deferred| color=orange")
-        for entry in sorted(todos[TodoRescheduled], key=attrgetter("date")):
-            print("-- {} {}".format(entry.date.isoformat(), entry))
-    if todos[TodoComplete]:
-        print("Done| color=green")
-        for entry in sorted(todos[TodoComplete], key=attrgetter("date")):
-            print("-- {} {}".format(entry.date.isoformat(), entry))
+    for klass, heading in sections.items():
+        if todos[klass]:
+            print(heading)
+            for entry in sorted(todos[klass], key=attrgetter("date")):
+                print("-- {} {}".format(entry.date.isoformat(), entry))
