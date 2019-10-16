@@ -15,7 +15,12 @@ class Encoder(JSONEncoder):
 
 
 def fromdt(dt: datetime.datetime):
-    return WORKLOG_DIR / str(dt.year) / str(dt.month) / (str(dt.day) + ".markdown")
+    return (
+        WORKLOG_DIR
+        / str(dt.year)
+        / str(dt.month)
+        / f"{dt.year}-{dt.month}-{dt.day}.markdown"
+    )
 
 
 def relative(path: pathlib.Path):
