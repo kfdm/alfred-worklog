@@ -18,7 +18,7 @@ def main():
 
     if not TARGET.exists():
         # Drop extension and use the rest of the file as our date
-        date, ext = args.path.split(".")
+        date, ext = TARGET.name.split(".")
 
         with open("template.markdown") as fp:
             TEMPLATE = fp.read()
