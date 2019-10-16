@@ -8,7 +8,7 @@ from worklog import config
 TODAY = datetime.datetime.today()
 
 parser = argparse.ArgumentParser()
-parser.add_argument("path", nargs="?", default=TODAY.strftime(config.WORKLOG_FMT))
+parser.add_argument("path", nargs="?", default=config.fromdt(TODAY))
 
 
 def main():
