@@ -113,8 +113,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>/usr/bin/env
-/usr/local/bin/worklog open $1</string>
+				<string>/usr/local/bin/worklog open $1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
