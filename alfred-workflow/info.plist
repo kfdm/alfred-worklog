@@ -6,7 +6,7 @@
 	<string>net.kungfudiscomonkey.alfred.worklog</string>
 	<key>connections</key>
 	<dict>
-		<key>6486C6B9-7B79-4F55-BBBA-56A88FE4E878</key>
+		<key>709530C9-3934-4CE2-BE9B-C9C0369A984F</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -19,24 +19,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>709530C9-3934-4CE2-BE9B-C9C0369A984F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6486C6B9-7B79-4F55-BBBA-56A88FE4E878</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>B18B0C8A-DDC0-450A-BDAF-A88619AE2C9D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6486C6B9-7B79-4F55-BBBA-56A88FE4E878</string>
+				<string>8AAB9500-95FA-4064-821D-3848FCC08163</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -84,9 +71,9 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>/usr/local/bin/worklog alfred run</string>
+				<string>worklog alfred run</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string>worklog.alfred</string>
 				<key>subtext</key>
@@ -113,9 +100,9 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>/usr/local/bin/worklog open $1</string>
+				<string>worklog open "{query}"</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string>open.alfred</string>
 				<key>type</key>
@@ -127,23 +114,6 @@
 			<string>8AAB9500-95FA-4064-821D-3848FCC08163</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>'{query}', {allvars}</string>
-				<key>cleardebuggertext</key>
-				<false/>
-				<key>processoutputs</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.debug</string>
-			<key>uid</key>
-			<string>6486C6B9-7B79-4F55-BBBA-56A88FE4E878</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -173,9 +143,9 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>/usr/local/bin/worklog alfred run</string>
+				<string>worklog alfred run</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string>worklog.alfred</string>
 				<key>subtext</key>
@@ -201,13 +171,6 @@ from www.flaticon.com
 is licensed by http://creativecommons.org/licenses/by/3.0/</string>
 	<key>uidata</key>
 	<dict>
-		<key>6486C6B9-7B79-4F55-BBBA-56A88FE4E878</key>
-		<dict>
-			<key>xpos</key>
-			<integer>290</integer>
-			<key>ypos</key>
-			<integer>130</integer>
-		</dict>
 		<key>709530C9-3934-4CE2-BE9B-C9C0369A984F</key>
 		<dict>
 			<key>xpos</key>
@@ -232,6 +195,8 @@ is licensed by http://creativecommons.org/licenses/by/3.0/</string>
 	</dict>
 	<key>variables</key>
 	<dict>
+		<key>PATH</key>
+		<string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
 		<key>WORKLOG</key>
 		<string>~/Documents/worklog</string>
 	</dict>
