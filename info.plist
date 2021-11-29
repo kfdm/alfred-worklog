@@ -71,7 +71,8 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>worklog alfred run</string>
+				<string>PATH=$PATH:/usr/local/bin
+/usr/local/bin/worklog alfred run</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -100,7 +101,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>worklog open "{query}"</string>
+				<string>/usr/local/bin/worklog open "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -143,7 +144,8 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>worklog alfred run</string>
+				<string>PATH=$PATH:/usr/local/bin
+/usr/local/bin/worklog alfred run</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
